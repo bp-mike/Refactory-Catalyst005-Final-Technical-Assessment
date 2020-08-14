@@ -1,0 +1,40 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.error{
+    color: red;
+}
+.container{
+    width: 50vw;
+    // height: 80vh;
+    background: none;
+    border: .3px groove rgb(201, 197, 197);
+    margin: 0 auto;
+    margin-top: 4rem;
+    padding: 3rem;
+    img{
+        width: 100%;
+    }
+    .btn{
+        float: right;
+        padding: .5rem;
+        width: 20rem;
+    }
+}
+
+.alert{
+    display: none;
+}
+// .btn{
+//     &:checked{
+//         .alert{
+//             display: block;
+//         }
+//     }
+//     // &:active{
+
+//     // }
+// }

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <title>Form</title>
+</head>
+
+<body>
+    <div class="container">
+        <img src="./static/img/form-header-image.png" alt="For God And My country">
+        <div class="text-center">
+            <p>Ministry of Health</p>
+            <h1>Covid-19(CORONA VIRUS )</h1>
+            <P>virus-Test Registration Form</P>
+            <div class="alert alert-primary" role="alert"> Registration was successfull </div>
+        </div>
+        <form class="needs-validation" name="cohot5" method="POST" action="/">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="Surname">Surname</label>
+                    <input type="text" class="form-control" id="surname" name="surname">
+                    <div class="error" id="surname_err"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="givenName">Given name</label>
+                    <input type="text" class="form-control" id="givenName" name="givenName">
+                    <div class="error" id="givenname_err"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="bd">Date of Birth</label>
+                    <input type="date" class="form-control" id="bd" name="bd">
+                    <div class="error" id="bd_err"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="place">Place of residence</label>
+                    <input type="text" class="form-control" id="place" name="place">
+                    <div class="error" id="place_err"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="occupation">Occupation</label>
+                    <input type="text" class="form-control" id="occupation" name="occupation">
+                    <div class="error" id="occupation_err"></div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="nationality">Nationality</label>
+                    <input type="text" class="form-control" id="nationality" name="nationality">
+                    <div class="error" id="nationality_err"></div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col form-group">
+                    <label class="form-check form-check-inline" for="gender"></label>
+                    <input class="form-check-input" type="radio" name='gender' value="female">
+                    <span class="form-check-label"> Female</span>
+
+                    <label class="form-check form-check-inline" for="gender"></label>
+                    <input class="form-check-input" type="radio" name='gender' value="male" checked>
+                    <span class="form-check-label"> Male</span>
+                    <div class="error" id="gender_err"></div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="custom-select" id="category" name="category">
+                    <option selected value="-- Select Category --">-- Select Category --</option>
+                    <option value="Returnee">Returnee</option>
+                    <option value="Contact">Contact</option>
+                    <option value="Alert">Alert </option>
+                    <option value="Volunteer"> Volunteer </option>
+                </select>
+                <div class="error" id="category_err"></div>
+            </div>
+
+
+            <button class="btn btn-primary" type="submit" onclick="validate_form()">Regiter</button>
+        </form>
+
+        
+        <script src="./static/js/validation.js"></script>
+        //- script.
+            function printError(elemId, hintMsg){
+                document.getElementById(elemId).innerHTML = hintMsg;
+            }
+            function validate_form(){
+                var surName = document.cohot5.surname.value;
+                var givenName = document.cohot5.givenName.value;
+                var bd = document.cohot5.bd.value;
+                var place = document.cohot5.place.value;
+                var occupation = document.cohot5.occupation.value;
+                var nationality = document.cohot5.nationality.value;
+                var gender = document.cohot5.gender.value;
+                var category = document.cohot5.category.value;
+
+                // ___ Defining error varriables with defaul value
+                var surname_err = givenname_err  = bd_err = place_err = occupation_err = nationality_err = gender_err = category_err = true;
+
+                // _______ validating first name
+                if(surName === ""){
+                    printError("surname_err", "please enter your Surname");
+                }
+                else  if(surName.length > 16){
+                    printError("surname_err", "Your name is too long");
+                }
+                else{
+                    var regex = /^[a-zA-Z\s]+$/;
+                    if(regex.test(surName) === false){
+                        printError("surname_err", "please enter a valid name");
+                    }else{
+                        printError("surname_err", "");
+                        surname_err = false;
+                    }
+                }
+            
+                // __________ Validating last name
+                if(givenName === ""){
+                    printError("givenname_err", "name should have atleast 1 character");
+                }else{
+                    var regex = /^[a-zA-Z\s]+$/;
+                    if(regex.test(givenName) === false){
+                        printError("givenname_err", "please enter a valid name")
+                    }else{
+                        printError("givenname_err", "");
+                        givenname_err = false;
+                    }
+                }
+
+                // _______ validating bd
+                if(bd === ""){
+                    printError("bd_err", "please enter date of birth");
+                }
+                // else  if(bd.value < 1){
+                //     printError("bd_err", "patient should be atleast 1yr old");
+                // }
+
+                // _______ validating place
+                if(place === ""){
+                    printError("place_err", "please enter place of residance");
+                }
+                else  if(place.length > 20){
+                    printError("place_err", "too long");
+                }
+                else{
+                    var regex = /^[a-zA-Z\s]+$/;
+                    if(regex.test(place) === false){
+                        printError("place_err", "please enter a valid location")
+                    }else{
+                        printError("place_err", "");
+                        place_err = false;
+                    }
+                }
+                // _______ validating occupation
+                if(occupation === ""){
+                    printError("occupation_err", "please enter ocupation");
+                }
+                else  if(occupation.length < 5 || occupation.length > 50){
+                    printError("occupation_err", "check lenth");
+                }
+                else{
+                    var regex = /^[a-zA-Z\s]+$/;
+                    if(regex.test(occupation) === false){
+                        printError("occupation_err", "please enter a valid occupation")
+                    }else{
+                        printError("occupation_err", "");
+                        occupation_err = false;
+                    }
+                }
+                // _______ validating nationality
+                if(nationality === ""){
+                    printError("nationality_err", "please enter nationality");
+                }
+                else  if(nationality.length < 5 || nationality.length > 20){
+                    printError("nationality_err", "invalid lenght");
+                }
+                else{
+                    var regex = /^[a-zA-Z\s]+$/;
+                    if(regex.test(nationality) === false){
+                        printError("nationality_err", "please enter a valid name")
+                    }else{
+                        printError("nationality_err", "");
+                        nationality_err = false;
+                    }
+                }
+
+                // _____ Validating gender
+                if(gender === ""){
+                    printError("gender_err", "please select your gender");
+                }else{
+                    printError("gender_err", "");
+                    gender_err = false;
+                }
+                
+                // _______ validating first name
+                if(category == "-- Select Category --"){
+                    printError("category_err", "please select category");
+                }else{
+                    printError("category_err", "");
+                    category_err = false;
+                }
+                
+                // _______ Preventing the form from being submited if their are any errors
+                if((surname_err || givenname_err  || bd_err || place_err || occupation_err || nationality_err || gender_err || category_err) === true){
+                    event.preventDefault()
+                }else{
+                    event.currentTarget.submit()
+                }
+                
+            }
+    </div>
+</body>
+
+</html>
